@@ -176,15 +176,24 @@ SlidingView.prototype.slideView = function(targetX) {
     this.sidebar.trigger( "slidingViewProgress", { current:targetX, max:this.sidebarWidth } );
 }
 
+SlidingView.prototype.isOpen = function() {
+    return this.bodyOffset == this.sidebarWidth;
+}
+
 SlidingView.prototype.close = function() {
+    if(!this.isOpen()) return;
     this.bodyOffset = 0;
     this.slideView(0);
 }
 
 SlidingView.prototype.open = function() {
-    if(this.bodyOffset == this.sidebarWidth) return;
+    if(this.isOpen()) return;
     this.bodyOffset = this.sidebarWidth;
     this.slideView(this.sidebarWidth);
+}
+
+SlidingView.prototype.toggle = function(){
+    this.isOpen() ? this.close() : this.open();
 }
 
 SlidingView.prototype.unbindEvents = function() {
