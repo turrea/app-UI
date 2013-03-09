@@ -120,9 +120,10 @@ SlidingView.prototype.updateBasedOnTouchPoints = function( currentPosition ) {
 	//this.body.css("left", targetX );
 	//console.log( this.body.css("left") );
 	
-	if ( this.body.css("left") != "0px" ) {
-		this.body.css("left", "0px" );
-	}
+	//if ( this.body.css("left") != "0px" ) {
+	//	this.body.css("left", "0px" );
+	//}
+	
 	this.body.css("-webkit-transform", "translate3d(" + targetX + "px,0,0)" );
 	this.body.css("-moz-transform", "translate3d(" + targetX + "px,0,0)" );
 	this.body.css("transform", "translate3d(" + targetX + "px,0,0)" );
@@ -170,6 +171,12 @@ SlidingView.prototype.slideView = function(targetX) {
     this.body.css("-webkit-transform", "translate3d(" + targetX + "px,0,0)" );
     this.body.css("-moz-transform", "translate3d(" + targetX + "px,0,0)" );
     this.body.css("transform", "translate3d(" + targetX + "px,0,0)" );
+	this.body.css("transition", "0.1s" );
+
+    var self = this;
+    setTimeout(function(){
+        self.body.css("transition", "");
+    }, 110);
 
     this.sidebar.trigger( "slidingViewProgress", { current:targetX, max:this.sidebarWidth } );
 }
