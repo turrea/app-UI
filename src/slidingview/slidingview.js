@@ -167,11 +167,9 @@ SlidingView.prototype.snapToPosition = function() {
 }
 
 SlidingView.prototype.slideView = function(targetX) {
-    this.body.stop(true, false).animate({
-        left:targetX,
-        avoidTransforms:false,
-        useTranslate3d: true
-    }, 100);
+    this.body.css("-webkit-transform", "translate3d(" + targetX + "px,0,0)" );
+    this.body.css("-moz-transform", "translate3d(" + targetX + "px,0,0)" );
+    this.body.css("transform", "translate3d(" + targetX + "px,0,0)" );
 
     this.sidebar.trigger( "slidingViewProgress", { current:targetX, max:this.sidebarWidth } );
 }
